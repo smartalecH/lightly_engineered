@@ -1,0 +1,17 @@
+project:
+  type: website
+  output-dir: _site
+
+website:
+  title: "Lightly Engineered"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: posts/mzm-system-design.qmd
+        text: Posts
+
+format:
+  html:
+    theme: cosmo
+    toc: true

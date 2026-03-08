@@ -1,0 +1,56 @@
+---
+title: "Building a Silicon MZM Design Flow"
+description: "A system-oriented post on building a surrogate MZM flow with gdsfactory, femwell, and compact EO models."
+date: 2026-03-07
+categories: [silicon-photonics, mzm, simulation]
+---
+
+## Why this matters
+
+A Mach-Zehnder modulator is not just a standalone device. It sits inside a larger link or compute system. That means the design flow should support:
+
+- geometry and layout
+- optical modes
+- carrier-driven phase shift
+- electrical parasitics
+- compact models
+- eventual system-level simulation
+
+## Package structure
+
+The companion Python package is `lightly_engineered`.
+
+Useful modules include:
+
+- `lightly_engineered.pdk.layer_stack`
+- `lightly_engineered.pdk.cross_sections`
+- `lightly_engineered.layout.mzm`
+- `lightly_engineered.sim.optical_modes`
+- `lightly_engineered.models.tline`
+
+## Example: generating the MZM layout
+
+```python
+from lightly_engineered.layout.mzm import mzm
+
+c = mzm()
+c.show()
+```
+
+## Example: solving the optical cross section
+
+```python
+from lightly_engineered.sim.optical_modes import solve_cross_section_modes
+
+result = solve_cross_section_modes(wavelength_um=1.31)
+print(result.neff)
+```
+
+## Next steps
+
+This post is only the beginning. The next extension is to add:
+
+- TCAD bias sweeps
+- capacitance extraction
+- traveling-wave electrode models
+- full-system co-design posts

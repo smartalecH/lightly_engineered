@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lightly_engineered"
+version = "0.1.0"
+description = "Silicon photonics and electro-optic system design utilities"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "numpy",
+  "scipy",
+  "matplotlib",
+  "pydantic>=2",
+  "gdsfactory",
+  "sax",
+]
+
+[project.optional-dependencies]
+full = [
+  "femwell",
+  "gplugins[femwell]",
+  "devsim",
+]
+dev = [
+  "pytest",
+  "ruff",
+  "mypy",
+]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[project.scripts]
+lightly-engineered = "lightly_engineered.cli:main"

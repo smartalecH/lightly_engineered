@@ -1,0 +1,9 @@
+---
+title: "Lightly Engineered"
+---
+
+# Lightly Engineered
+
+This site is for full-system design posts around photonic systems, electro-optic devices, and simulation-driven engineering.
+
+Start with the MZM post.
