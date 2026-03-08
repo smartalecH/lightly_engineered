@@ -9,6 +9,10 @@ def get_layer_stack(cfg: StackConfig | None = None) -> LayerStack:
     cfg = cfg or StackConfig()
     rib_height = cfg.si_thickness_um - cfg.slab_thickness_um
 
+    # Notes on provenance:
+    # - Si/BOX/slab dimensions come from public 45CLO publication summaries.
+    # - This LayerStack is still a reduced simulation stack, not the full
+    #   proprietary BEOL stack used in foundry signoff.
     return LayerStack(
         layers=dict(
             substrate=LayerLevel(
@@ -49,13 +53,18 @@ def get_layer_stack(cfg: StackConfig | None = None) -> LayerStack:
             m1=LayerLevel(
                 layer=LAYER.M1,
                 zmin=1.2,
-                thickness=0.6,
-                material="Al",
+                # Publication-grounded RF BEOL detail (OFC 2020, Fig. 2b text):
+                # top metal includes a 1.2 um copper layer.
+                # We model that as M1 here.
+                thickness=1.2,
+                material="Cu",
                 mesh_order=10,
             ),
             m2=LayerLevel(
                 layer=LAYER.M2,
-                zmin=2.2,
+                zmin=2.6,
+                # Publication-grounded RF BEOL detail (same source):
+                # top metal includes a 1.2 um aluminum layer.
                 thickness=1.2,
                 material="Al",
                 mesh_order=11,

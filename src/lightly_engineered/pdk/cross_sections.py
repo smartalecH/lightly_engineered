@@ -13,6 +13,10 @@ def xs_phase_shifter(cfg: PhaseShifterConfig | None = None) -> CrossSection:
     cfg = cfg or PhaseShifterConfig()
     active_offset = cfg.active_width_um / 2 + cfg.active_gap_um / 2
 
+    # Cross-section composition:
+    # - rib + slab layers are 45CLO-like (160 nm Si, 50 nm slab via StackConfig)
+    # - doped regions/contact offsets are tutorial assumptions for a realistic
+    #   depletion-style modulator surrogate, not foundry-verified dimensions.
     sections = [
         Section(width=cfg.slab_width_um, offset=0, layer=LAYER.SLAB, name="slab"),
         Section(
